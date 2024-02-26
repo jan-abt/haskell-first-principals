@@ -1,0 +1,14 @@
+{
+	"folders": [
+     	{
+			"path": "chapter-app"
+		},
+		{
+			"path": "monoid-exercises"
+		},		
+		{
+			"path": "semigroup-exercises"
+		}
+	],
+	"settings": {}
+}
