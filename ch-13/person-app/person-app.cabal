@@ -1,0 +1,34 @@
+cabal-version:      3.0
+name:               person-app
+version:            0.1.0.0
+synopsis:           My Project
+-- description:
+license:            MIT
+license-file:       LICENSE
+author:             ja-cha
+maintainer:         jan_abt@yahoo.com
+-- copyright:
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+-- extra-source-files:
+
+common common-all
+    build-depends:    base ^>=4.18.1.0 && < 5,
+                      Cabal ^>=3.10.2.1                     
+    default-language: GHC2021
+    ghc-options:      -Wall  
+
+library
+    import:           common-all
+    exposed-modules:  Lib
+    hs-source-dirs:   src
+    -- other-modules:
+    -- other-extensions:
+
+
+executable person-app
+    import:           common-all
+    main-is:          Main.hs
+    other-modules:    Lib
+    -- other-extensions:    
+    hs-source-dirs:   app

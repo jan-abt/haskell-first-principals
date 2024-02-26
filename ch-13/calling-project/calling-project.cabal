@@ -1,0 +1,24 @@
+cabal-version:      3.0
+name:               calling-project
+version:            0.1.0.0
+synopsis:           multi project build
+description:        multi project build exercise
+license:            MIT
+license-file:       LICENSE
+author:             ja-cha
+maintainer:         jan_abt@yahoo.com
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+-- extra-source-files:
+
+common common-all                      
+    default-language: GHC2021
+    ghc-options:      -Wall
+    build-depends:    base ^>=4.18.1.0 && < 5,
+                      Cabal ^>=3.10.2.1
+
+executable other-project
+    import:           common-all
+    main-is:          Main.hs
+    other-modules:    Lib
+    hs-source-dirs:   app, ../hello-haskell/src

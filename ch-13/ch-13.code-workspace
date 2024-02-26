@@ -1,0 +1,20 @@
+{
+	"folders": [
+     	{
+			"path": "calling-project"
+		},
+		{
+			"path": "hangman-app"
+		},		
+		{
+			"path": "hello-haskell"
+		},
+		{
+			"path": "palindrome-app"
+		},		
+		{
+			"path": "person-app"
+		}				
+	],
+	"settings": {}
+}
