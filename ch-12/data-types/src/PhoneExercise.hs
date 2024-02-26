@@ -1,6 +1,6 @@
-module PhoneExercise 
+module PhoneExercise where
 -- (assocDigWithBtnPresses, assocCharsWithBtns, toCharacter) 
-where
+
 
 import Data.Char    
 import Data.Bool

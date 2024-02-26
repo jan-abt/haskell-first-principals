@@ -1,4 +1,4 @@
-module Arity where
+module TypeInhabitantCalculation where
 
 
 data Quantum =

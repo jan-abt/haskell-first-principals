@@ -1,4 +1,4 @@
-module Deconstruction  wherei
+module Deconstruction  where
 
 
 newtype Name    = Name String deriving Show
