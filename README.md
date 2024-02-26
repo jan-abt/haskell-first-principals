@@ -1,0 +1,2 @@
+# haskell-first-principals
+ Book
