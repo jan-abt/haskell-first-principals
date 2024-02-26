@@ -1,3 +1,4 @@
+*~
 dist
 dist-*
 cabal-dev
@@ -17,7 +18,10 @@ cabal.sandbox.config
 *.hp
 *.eventlog
 .stack-work/
+.vscode/
 cabal.project.local
 cabal.project.local~
 .HTF/
 .ghc.environment.*
+*.yaml.lock
+.DS_Store
