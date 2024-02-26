@@ -1,3 +1,5 @@
+module DayOfWeek where
+    
 data DayOfWeek =  Mon | Tue | Weds | Thu | Fri | Sat | Sun
 
 instance Eq DayOfWeek where

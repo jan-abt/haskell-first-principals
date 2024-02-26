@@ -1,3 +1,5 @@
+module ParameterizedDataType  where
+
 -- writing an instance of the Eq type class where the instance data type 
 -- has a polymorphic parameter, here "a" of "Indentity a"
 data Identity a = Identity a

@@ -1,4 +1,6 @@
--- ch-07/Numberish.hs
+module Numberish  where
+
+  -- ch-07/Numberish.hs
 
 
 -- class definitions are comprised of a set of operations and values all instances will provide. 

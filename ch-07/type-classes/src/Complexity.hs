@@ -1,3 +1,5 @@
+module Complexity where
+
 data Complexity =
  Trivial | Complex
 
