@@ -1,0 +1,33 @@
+cabal-version:      3.0
+name:               arithmetic-app
+version:            0.1.0.0
+synopsis:           Testing Arithmetic functions using HSpec 
+-- description:
+license:            MIT
+license-file:       LICENSE
+author:             ja-cha
+maintainer:         jan_abt@yahoo.com
+-- copyright:
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+-- extra-source-files:
+
+common all-commons
+  build-depends:
+    base ^>=4.18.1.0 && < 5, 
+    Cabal ^>=3.10.2.1,
+    hspec, 
+    QuickCheck
+  default-language: GHC2021
+  ghc-options:      -Wall
+
+library
+    import:           all-commons
+    exposed-modules:  Arithmetic, ArbitraryInstances
+    hs-source-dirs:   src
+    
+executable arithmetic-app
+    import:           all-commons
+    main-is:          Main.hs
+    other-modules:    Arithmetic, ArbitraryInstances 
+    hs-source-dirs:   app, src

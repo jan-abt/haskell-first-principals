@@ -1,0 +1,14 @@
+{
+	"folders": [
+     	{
+			"path": "arithmetic-app"
+		},
+		{
+			"path": "chapter-tests"
+		},		
+		{
+			"path": "morse-code-app"
+		}
+	],
+	"settings": {}
+}

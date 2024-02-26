@@ -1,0 +1,47 @@
+cabal-version:      3.0
+name:               morse-code-app
+version:            0.1.0.0
+synopsis:           My Project
+license:            MIT
+license-file:       LICENSE
+author:             ja-cha
+maintainer:         jan_abt@yahoo.com
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+
+common common-all
+    ghc-options: -Wall -fwarn-tabs
+    hs-source-dirs:   src
+    default-language: GHC2021
+
+
+library
+    import:           common-all
+    exposed-modules:  Morse
+    build-depends:    base ^>=4.18.1.0 && < 5, 
+                      Cabal ^>=3.10.2.1,
+                      containers,
+                      QuickCheck
+    
+executable morse-code-app
+    import:           common-all
+    main-is:          Main.hs
+    other-modules:    Morse
+    build-depends:    base ^>=4.18.1.0 && < 5, 
+                      Cabal ^>=3.10.2.1,
+                      containers,
+                      QuickCheck,
+                      morse-code-app
+    hs-source-dirs:   app
+    
+    
+test-suite test-test
+    import:           common-all
+    other-modules:    Morse
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   tests
+    main-is:          Tests.hs
+    build-depends:    base ^>=4.18.1.0 && < 5, 
+                      Cabal ^>=3.10.2.1,
+                      containers,
+                      QuickCheck  
