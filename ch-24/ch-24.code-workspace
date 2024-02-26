@@ -1,0 +1,17 @@
+{
+	"folders": [     			
+		{
+			"path": "parser-combinators"
+		}
+	],
+	"settings": {
+		"haskell.plugin.hlint.config.flags": [],
+		"haskell.hlint.hints": [
+			"ignore", 
+			"suggest",
+			"warn",
+			"error",
+			"info"
+		]
+	}
+}
