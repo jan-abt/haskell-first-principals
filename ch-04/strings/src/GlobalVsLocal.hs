@@ -1,4 +1,4 @@
-module GlobalLocal where
+module GlobalVsLocal where
 
 topLevelFunction :: Integer -> Integer 
 topLevelFunction x = x + woot + topLevelValue
