@@ -1,4 +1,4 @@
-module DataTypes01 where
+module DataTypes02 where
 
 data Mood = Blah | Woot deriving Show
   
