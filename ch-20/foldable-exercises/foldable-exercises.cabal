@@ -1,0 +1,43 @@
+cabal-version:      3.0
+name:               foldable-exercises
+version:            0.1.0.0
+synopsis:           Synopsis of foldable-exercises
+license:            MIT
+license-file:       LICENSE
+author:             ja-cha
+maintainer:         jan_abt@yahoo.com
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+
+common common-all
+    ghc-options: -Wall -fwarn-tabs
+    default-language: GHC2021
+    
+library
+    import:           common-all
+    exposed-modules:  Lib, Doodles, Exercises
+    hs-source-dirs:   src
+    build-depends:    base ^>=4.18.1.0 && < 5,
+                      Cabal ^>=3.10.2.1
+                      
+                
+executable foldable-exercises
+    import:           common-all
+    main-is:          Main.hs
+    other-modules:    Lib
+    hs-source-dirs:   src, app
+    build-depends:    base ^>=4.18.1.0 && < 5,
+                      Cabal ^>=3.10.2.1
+                   
+
+test-suite test-app
+    import:           common-all
+    other-modules:    Lib
+    type:             exitcode-stdio-1.0
+    main-is:          TestSuite.hs
+    hs-source-dirs:   src, test
+    build-depends:    base ^>=4.18.1.0 && < 5,
+                      Cabal ^>=3.10.2.1,
+                      hspec ^>= 2.11.7,
+                      QuickCheck ^>= 2.14.3,
+                      checkers ^>=0.6.0 
