@@ -1,0 +1,41 @@
+cabal-version:      3.0
+name:               type-inference
+version:            0.1.0.0
+synopsis:           Synopsis of type-inference
+license:            MIT
+license-file:       LICENSE
+author:             ja-cha
+maintainer:         jan_abt@yahoo.com
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+
+common common-all
+    ghc-options: -Wall -fwarn-tabs
+    default-language: GHC2021
+    build-depends:    base ^>=4.18.1.0 && < 5,
+                      Cabal ^>=3.10.2.1
+    
+library
+    import:           common-all
+    exposed-modules:  Lib, Doodles, TypeInference01
+    hs-source-dirs:   src
+    build-depends:    hspec ^>= 2.11.7,
+                      QuickCheck ^>= 2.14.3,
+                      checkers ^>=0.6.0 
+                
+executable monad-transformers
+    import:           common-all
+    main-is:          Main.hs
+    other-modules:    Lib, Doodles
+    hs-source-dirs:   app, src
+    build-depends:    hspec ^>= 2.11.7,
+                      QuickCheck ^>= 2.14.3
+
+test-suite test-app
+    import:           common-all
+    other-modules:    Lib
+    type:             exitcode-stdio-1.0
+    main-is:          TestSuite.hs
+    hs-source-dirs:   src, test
+    build-depends:    hspec ^>= 2.11.7,
+                      QuickCheck ^>= 2.14.3
