@@ -1,0 +1,47 @@
+cabal-version:      3.0
+name:               traversable-exercises
+version:            0.1.0.0
+synopsis:           Synopsis of traversable-exercises
+license:            MIT
+license-file:       LICENSE
+author:             ja-cha
+maintainer:         jan_abt@yahoo.com
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+
+common common-all
+    ghc-options: -Wall -fwarn-tabs
+    default-language: GHC2021
+    
+library
+    import:           common-all
+    exposed-modules:  Lib, Doodles, Exercises, HttpLib, Eval, Dyad
+    hs-source-dirs:   src
+    build-depends:    base ^>=4.18.1.0 && < 5,
+                      Cabal ^>=3.10.2.1,
+                      bytestring ^>=0.12.0.2,
+                      wreq ^>= 0.5.4.2, 
+                      hspec,
+                      QuickCheck,
+                      checkers ^>=0.6.0 
+                
+executable traversable-exercises
+    import:           common-all
+    main-is:          Main.hs
+    other-modules:    Lib
+    hs-source-dirs:   src, app
+    build-depends:    base ^>=4.18.1.0 && < 5,
+                      Cabal ^>=3.10.2.1,
+                      hspec,
+                      QuickCheck
+
+test-suite test-app
+    import:           common-all
+    other-modules:    Lib
+    type:             exitcode-stdio-1.0
+    main-is:          TestSuite.hs
+    hs-source-dirs:   src, test
+    build-depends:    base ^>=4.18.1.0 && < 5,
+                      Cabal ^>=3.10.2.1,
+                      hspec,
+                      QuickCheck
