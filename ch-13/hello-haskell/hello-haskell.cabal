@@ -1,0 +1,32 @@
+cabal-version:      3.0
+name:               hello-haskell
+version:            0.1.0.0
+synopsis:           Multi project build
+description:        Multi project build exercise
+license:            MIT
+license-file:       LICENSE
+author:             ja-cha
+maintainer:         jan_abt@yahoo.com
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+-- extra-source-files:
+
+
+common common-all
+    build-depends:    base ^>=4.18.1.0 && < 5,
+                      Cabal ^>=3.10.2.1                     
+    default-language: GHC2021
+    ghc-options:      -Wall    
+
+
+library
+    import:           common-all 
+    exposed-modules:  Lib
+    hs-source-dirs:   src
+
+
+executable hello-haskell
+    import:           common-all
+    main-is:          Main.hs
+    other-modules:    Lib
+    hs-source-dirs:   app

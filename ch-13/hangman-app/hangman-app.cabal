@@ -1,0 +1,42 @@
+cabal-version:      3.0
+name:               hangman-app
+version:            0.1.0.0
+synopsis:           My Project
+description:        My Project  
+license:            MIT
+license-file:       LICENSE
+author:             ja-cha
+maintainer:         jan_abt@yahoo.com
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+extra-source-files: data/dict.txt
+
+common common-all
+  build-depends:    base ^>=4.18.1.0 && < 5,
+                    Cabal ^>=3.10.2.1,
+                    random == 1.2.1.1,
+                    split == 0.2.4,
+                    hspec, 
+                    QuickCheck
+  default-language: GHC2021
+  ghc-options:      -Wall
+
+library
+  import:           common-all 
+  exposed-modules:  Lib
+  hs-source-dirs:   src
+
+executable hangman-app
+  import:           common-all
+  main-is:          Main.hs
+  other-modules:    Lib
+  hs-source-dirs:   app, src
+  
+test-suite spec
+  import:           common-all
+  type:             exitcode-stdio-1.0
+  main-is:          Spec.hs
+  other-modules:    Lib
+  hs-source-dirs:   test, src
+  
+    
