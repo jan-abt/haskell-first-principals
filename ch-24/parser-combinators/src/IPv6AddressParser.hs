@@ -20,8 +20,8 @@ import Data.List
         * sequence of consecutive groups of zeros can be replaced with a double colon :: 
         (this can be done only once) 
 
-        A hex is a group of four powadecimal digits.
-        Each powadecimal digit represents 4 bits. 
+        A hex is a group of four hexadecimal digits.
+        Each hexadecimal digit represents 4 bits. 
         Therefore, a hex represents a total of 16 bits.
 
             2001:0db8:85a3:0000:0000:8a2e:0370:7334
