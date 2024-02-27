@@ -1,4 +1,4 @@
-# Revision history for other-project
+# Revision history for dependent-project
 
 ## 0.1.0.0 -- YYYY-mm-dd
 

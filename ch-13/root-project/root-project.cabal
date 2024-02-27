@@ -1,5 +1,5 @@
 cabal-version:      3.0
-name:               calling-project
+name:               root-project
 version:            0.1.0.0
 synopsis:           multi project build
 description:        multi project build exercise
@@ -21,4 +21,4 @@ executable other-project
     import:           common-all
     main-is:          Main.hs
     other-modules:    Lib
-    hs-source-dirs:   app, ../hello-haskell/src
+    hs-source-dirs:   app, ../dependent-project/src

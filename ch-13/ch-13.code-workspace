@@ -1,14 +1,14 @@
 {
 	"folders": [
      	{
-			"path": "calling-project"
+			"path": "root-project"
+		},
+		{
+			"path": "dependent-project"
 		},
 		{
 			"path": "hangman-app"
 		},		
-		{
-			"path": "hello-haskell"
-		},
 		{
 			"path": "palindrome-app"
 		},		

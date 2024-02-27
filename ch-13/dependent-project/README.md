@@ -1,4 +1,4 @@
-# README for: hello-haskell
+# README for: dependent-project
 
 ## V. 0.1.0.0 -- 2024-02-16
 
