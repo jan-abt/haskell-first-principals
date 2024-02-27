@@ -1,4 +1,4 @@
-# README for: exercises
+# README for: recursion
 
 ## V. 0.1.0.0 -- 2024-02-16
 
