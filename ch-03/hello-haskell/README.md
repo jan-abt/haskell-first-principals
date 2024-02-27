@@ -1,4 +1,4 @@
-# README for:myfirstapp
+# README for: hello-haskell
 
 ## V. 0.1.0.0 -- 2024-02-16
 
