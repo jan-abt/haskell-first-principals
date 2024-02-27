@@ -1,4 +1,4 @@
-# Revision history for: exercises
+# Revision history for: recursion
 
 ## 0.1.0.0 -- 2024-01-01
 
