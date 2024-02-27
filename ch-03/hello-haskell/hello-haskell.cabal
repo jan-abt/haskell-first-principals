@@ -1,5 +1,5 @@
 cabal-version:      3.0
-name:               myfirstapp
+name:               hello-haskell
 version:            0.1.0.0
 license:            NONE
 author:             jan_abt@yahoo.com
