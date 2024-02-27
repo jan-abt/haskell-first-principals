@@ -1,6 +1,6 @@
 
--- TypeInference01.hs
-module TypeInference01 where 
+-- Types.hs
+module Types where 
 
  {-
  -  

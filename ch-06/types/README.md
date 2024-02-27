@@ -1,4 +1,4 @@
-# README for: type-inference
+# README for: types
 
 ## V. 0.1.0.0 -- 2024-02-26
 
