@@ -1,4 +1,4 @@
-# README for: data-types
+# README for: algebraic-data-types
 
 ## V. 0.1.0.0 -- 2024-02-26
 

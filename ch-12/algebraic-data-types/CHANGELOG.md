@@ -1,4 +1,4 @@
-# Revision history for: data-types
+# Revision history for: algebraic-data-types
 
 ## 0.1.0.0 -- 2024-02-26
 
