@@ -1,7 +1,12 @@
 {
 	"folders": [
 		{
+
 			"path": "cipher-app"
+		},
+		{
+			"path": "lists"
+		
 		}			
 	],
 	"settings": {}

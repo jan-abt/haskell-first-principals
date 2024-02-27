@@ -1,5 +1,5 @@
 cabal-version:      3.0
-name:               cipher-app
+name:               lists
 version:            0.1.0.0
 synopsis:           My Project
 description:        My Project  
@@ -20,7 +20,7 @@ common common-all
 
 library
   import:           common-all 
-  exposed-modules:  Lib
+  exposed-modules:  Exercises, ListComprehensions, Lists
   hs-source-dirs:   src
 
 executable cipher-app
