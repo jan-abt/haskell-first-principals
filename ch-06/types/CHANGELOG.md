@@ -1,4 +1,4 @@
-# Revision history for: type-inference
+# Revision history for: types
 
 ## 0.1.0.0 -- 2024-02-26
 
