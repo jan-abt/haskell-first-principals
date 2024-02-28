@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module
-    URLShortener
+    UrlShortener
         where
 
 import Control.Monad (replicateM)

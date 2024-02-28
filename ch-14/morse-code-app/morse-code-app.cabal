@@ -1,7 +1,7 @@
 cabal-version:      3.0
 name:               morse-code-app
 version:            0.1.0.0
-synopsis:           My Project
+synopsis:           My Morse Code Project
 license:            MIT
 license-file:       LICENSE
 author:             ja-cha

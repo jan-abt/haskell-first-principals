@@ -1,8 +1,7 @@
 cabal-version:      3.0
 name:               lists
 version:            0.1.0.0
-synopsis:           My Project
-description:        My Project  
+synopsis:           My Lists Project
 license:            MIT
 license-file:       LICENSE
 author:             ja-cha

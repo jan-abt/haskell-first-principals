@@ -1,8 +1,7 @@
 cabal-version:      3.0
 name:               root-project
 version:            0.1.0.0
-synopsis:           multi project build
-description:        multi project build exercise
+synopsis:           My Root Project
 license:            MIT
 license-file:       LICENSE
 author:             ja-cha

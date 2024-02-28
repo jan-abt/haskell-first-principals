@@ -1,7 +1,7 @@
 cabal-version:      3.0
 name:               monad-transformers
 version:            0.1.0.0
-synopsis:           Synopsis of monad-transformers
+synopsis:           My Monad Tranformers Project
 license:            MIT
 license-file:       LICENSE
 author:             ja-cha

@@ -1,7 +1,7 @@
 cabal-version:      3.0
 name:               arithmetic-app
 version:            0.1.0.0
-synopsis:           Testing Arithmetic functions using HSpec 
+synopsis:           My Arithmetic App Project
 -- description:
 license:            MIT
 license-file:       LICENSE

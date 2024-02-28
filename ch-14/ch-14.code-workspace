@@ -1,11 +1,11 @@
 {
 	"folders": [
      	{
-			"path": "arithmetic-app"
+			"path": "testing"
 		},
-		{
-			"path": "chapter-tests"
-		},		
+     	{
+			"path": "arithmetic-app"
+		},				
 		{
 			"path": "morse-code-app"
 		}

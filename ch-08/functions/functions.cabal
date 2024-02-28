@@ -1,7 +1,7 @@
 cabal-version:      3.0
 name:               functions
 version:            0.1.0.0
-synopsis:           Synopsis of functions
+synopsis:           My Functions Project
 license:            MIT
 license-file:       LICENSE
 author:             ja-cha

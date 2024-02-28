@@ -4,10 +4,10 @@
 			"path": "chapter-app"
 		},
 		{
-			"path": "monoid-exercises"
+			"path": "monoid"
 		},		
 		{
-			"path": "semigroup-exercises"
+			"path": "semigroup"
 		}
 	],
 	"settings": {}

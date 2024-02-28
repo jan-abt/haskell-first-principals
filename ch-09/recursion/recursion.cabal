@@ -1,7 +1,7 @@
 cabal-version:      3.0
 name:               recursion
 version:            0.1.0.0
-synopsis:           Synopsis of exercises
+synopsis:           My Recursion Project
 license:            MIT
 license-file:       LICENSE
 author:             ja-cha

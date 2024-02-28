@@ -1,7 +1,7 @@
 cabal-version:      3.0
 name:               algebraic-data-types
 version:            0.1.0.0
-synopsis:           Synopsis of data-types
+synopsis:           My Algebraic Data Types Project
 license:            MIT
 license-file:       LICENSE
 author:             ja-cha

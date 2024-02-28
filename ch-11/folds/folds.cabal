@@ -1,7 +1,7 @@
 cabal-version:      3.0
 name:               folds
 version:            0.1.0.0
-synopsis:           Synopsis of folds
+synopsis:           My Folds Project
 license:            MIT
 license-file:       LICENSE
 author:             ja-cha
