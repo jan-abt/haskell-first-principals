@@ -15,12 +15,11 @@ common common-all
     build-depends:    base ^>=4.18.1.0 && < 5,
                       Cabal ^>=3.10.2.1,
                       transformers-either ^>=0.1.4,
-                      transformers ^>=0.6.1.1
-                
-    
+                      transformers ^>=0.6.1.1                
 library
     import:           common-all
-    exposed-modules:  MaybeTransformer, EitherTransformer, ReaderTransformer, StateTransformer, OuterInner, Scotty, Lib, MonadTrans, MonadIO
+    exposed-modules:  MaybeTransformer, EitherTransformer, ReaderTransformer, StateTransformer, 
+                      OuterInner, Scotty, Lib, MonadTrans, MonadIO, MaybeTExample
     hs-source-dirs:   src
     build-depends:    hspec ^>= 2.11.7,
                       QuickCheck ^>= 2.14.3,

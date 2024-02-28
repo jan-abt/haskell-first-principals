@@ -3,10 +3,7 @@
 module MonadIO where
 
 import Prelude hiding (abs)
-
 import Data.Bifunctor
-
-
 
 class (Monad m) => MonadIO m where
   -- | "lifts" a computation from the 'IO' monad.
