@@ -4,14 +4,16 @@ module MaybeTExample where
 
 import Control.Monad.IO.Class 
 import Control.Monad.Trans.Class 
-import Control.Monad.Trans.Maybe (MaybeT(..)) 
+import Control.Monad.Trans.Maybe 
 import Data.Text.Lazy (Text) 
 import Web.Scotty
 import Control.Exception (SomeException)
 
 param' :: Parsable a => Text -> MaybeT ActionM a 
 param' k = MaybeT $
-    catch (Just <$> queryParam k) (\(_ :: SomeException) -> pure Nothing)
+              catch 
+                (Just <$> queryParam k) 
+                (\(_ :: SomeException) -> pure Nothing)
 
 type Record = (Integer, Integer, Integer, Integer)
 
@@ -31,4 +33,4 @@ main = scotty 3000 $ do
     liftIO $ print record
     html $ mconcat ["<h1>Scotty, ", beam, " me up!</h1>"]
 
--- http://localhost:3000/beam?1=10&2=20&3=30&4=40    
+-- curl  http://localhost:3000/beam?1=10&2=20&3=30&4=40    
