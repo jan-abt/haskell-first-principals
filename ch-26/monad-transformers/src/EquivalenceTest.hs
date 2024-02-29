@@ -26,7 +26,7 @@ import Control.Monad.Trans.Maybe
 
     Recap:  ReaderT monad transformer 
       * designed to carry an environment throughout the computation.
-      * the "ask" function is used within the context of the 
+      * here, the "ask" function is used within the context of the 
         "ReaderT Int Maybe" monad transformer stack. 
       * here, ask is providing access to the 
         environment value of type "Int" within the "ReaderT" monad. 
@@ -51,16 +51,16 @@ maybeTReaderExample =
 
 -- ============================== RUN EXAMPLES ==============================
 
--- Example function using ReaderT r Maybe
--- runReaderTMaybeExample 0
--- runReaderTMaybeExample 1
+-- function using ReaderT r Maybe
 runReaderTMaybeExample :: Int -> Maybe String
 runReaderTMaybeExample env = 
   runReaderT readerTMaybeExample env
+-- runReaderTMaybeExample 0
+-- runReaderTMaybeExample 1
 
--- Example function using MaybeT (Reader r)
--- runMaybeTReaderExample 0
--- runMaybeTReaderExample 1
+-- function using MaybeT (Reader r)
 runMaybeTReaderExample :: Int -> Maybe String
 runMaybeTReaderExample env = 
   runReader (runMaybeT maybeTReaderExample) env
+-- runMaybeTReaderExample 0
+-- runMaybeTReaderExample 1
