@@ -5,7 +5,9 @@ module EquivalenceTest where
 import Control.Monad.Reader
 import Control.Monad.Trans.Maybe
 
+
 {-
+
     "ReaderT r Maybe a" and "MaybeT (Reader r) a" are not exactly equivalent.
     They are often be used interchangeably depending on the context. 
 
@@ -24,13 +26,6 @@ import Control.Monad.Trans.Maybe
     * Represents a computation in the environment r that may fail.
     * May return a Maybe (Reader r a) result.  
 
-    Recap:  ReaderT monad transformer 
-      * designed to carry an environment throughout the computation.
-      * here, the "ask" function is used within the context of the 
-        "ReaderT Int Maybe" monad transformer stack. 
-      * here, ask is providing access to the 
-        environment value of type "Int" within the "ReaderT" monad. 
-
 -}
 
 -- ReaderT r Maybe a
@@ -48,6 +43,7 @@ maybeTReaderExample =
     if env > 0
       then return "Positive"
       else return "Not Positive"
+
 
 -- ============================== RUN EXAMPLES ==============================
 
