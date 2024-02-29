@@ -54,6 +54,13 @@ readerStateMaybeComputation =
           return $ show env ++ " is a negative value"
 
 
+readerPrintAndInc :: (Num a, Show a) => ReaderT a IO a
+readerPrintAndInc =
+   ask >>= \env -> 
+        lift $ putStrLn ("Hi: " ++ show env) >> 
+            pure (env+1)
+
+
 -- ============================== RUN EXAMPLES ==============================
 
 runReaderWriterMaybeComputation :: Int -> Maybe (String, String)
@@ -67,3 +74,11 @@ runReaderStateMaybeTransformerStack env =
   runStateT (runReaderT readerStateMaybeComputation env)
 -- runReaderStateMaybeTransformerStack 100 0
 -- runReaderStateMaybeTransformerStack (-100) 0
+
+runReaderPrintAndInc :: Integer -> IO Integer
+runReaderPrintAndInc = runReaderT readerPrintAndInc
+-- runReaderPrintAndInc 1
+
+runReaderPrintAndIncMap :: [Integer] -> IO [Integer]
+runReaderPrintAndIncMap = mapM (runReaderT readerPrintAndInc)
+-- runReaderPrintAndIncMap [1..10]
