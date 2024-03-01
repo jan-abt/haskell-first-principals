@@ -3,18 +3,29 @@
 module Scotty where
 
 import Web.Scotty ( ScottyM, ActionM, get, html, pathParam, scotty )
-import Web.Scotty.Internal.Types (ActionT(..))
+import Web.Scotty.Internal.Types (ActionT(..), ScottyT(..))
 import Control.Monad.Trans.Class ( MonadTrans(lift) )
 
 --   ======================================================================================== 
 --   ================= Scotty Web's ActionT, using the "ReaderT" pattern ====================
 --   ======================================================================================== 
 --
---     ActionM is a type alias of the ActionT type for a specific underlying monad m (e.g., IO).
+--
+--    import Control.Monad.Trans.State.Strict.State
+--
+--    ScottyM is a type alias of the ScottyT type for a specific underlying monad m (e.g., IO).
+--
+--        type ScottyM = ScottyT IO :: * -> *
+--
+--         newtype ScottyT m a = ScottyT {
+--           runS :: State (ScottyState m) a
+--         }
+--
+--    ActionM is a type alias of the ActionT type for a specific underlying monad m (e.g., IO).
 -- 
---         type ActionM = ActionT IO :: * -> *
+--        type ActionM = ActionT IO :: * -> *
 -- 
---     The ActionT type provides an abstraction for building web actions in the context of the Scotty web framework.
+--    The ActionT type provides an abstraction for building web actions in the context of the Scotty web framework.
 -- 
 --         newtype ActionT m a = ActionT {
 --             runAM :: ReaderT ActionEnv m a
