@@ -18,11 +18,14 @@ data Config = Config {
 }
 
 type Scotty = ScottyT (ReaderT Config IO) ()
+type ActionHandler = ActionT (ReaderT Config IO) ()
 
 app :: Scotty
 app = do
-    get "/:key" $ do
+    get "/:key" handleGETAction
 
+handleGETAction :: ActionHandler
+handleGETAction =   do
         config <- ask
         paramValue <- pathParam @Text "key"
 
