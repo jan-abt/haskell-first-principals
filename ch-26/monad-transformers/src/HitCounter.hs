@@ -94,6 +94,3 @@ main = do
             Port -> (ReaderT Config IO Response -> IO Response) -> ScottyT (ReaderT Config IO) () -> IO  ()
     -}
     scottyT 3000 (withConfig cfg) app
-
-
---runWithInitialConfig :: ScottyT (ReaderT Config IO) a -> IO a    
