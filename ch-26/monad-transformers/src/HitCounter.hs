@@ -34,7 +34,6 @@ handleGETAction =   do
         -- Lift the hitCount IO action into the Scotty monad
         result <- liftIO $ TL.pack . show <$> hitCount 
 
-        -- Your application logic using the config data
         html $ mconcat [ 
                 "<h1>Success! Count is: ", 
                     result,
