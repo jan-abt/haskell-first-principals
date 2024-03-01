@@ -72,8 +72,8 @@ getHitCount ky cnf =
     let c = (`intStr` "A")
     c 5 
 -}
-withConfig ::Config -> ReaderT Config m a -> m a
-withConfig cfg = (`runReaderT` cfg)    
+runWithConfig ::Config -> ReaderT Config m a -> m a
+runWithConfig cfg = (`runReaderT` cfg)    
 
 -- ghci> :main a-prefix-to-be-stored-in-config
 main :: IO ()
@@ -93,4 +93,4 @@ main = do
                      |------ m -------|                                     |------ m -------|      | n |
             Port -> (ReaderT Config IO Response -> IO Response) -> ScottyT (ReaderT Config IO) () -> IO  ()
     -}
-    scottyT 3000 (withConfig cfg) app
+    scottyT 3000 (runWithConfig cfg) app
