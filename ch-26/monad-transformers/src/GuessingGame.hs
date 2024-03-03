@@ -11,9 +11,12 @@ import Control.Monad (forever)
 import System.IO 
 
 {-
-   Results of numbers, entered by user input and by randomly generation
-   are collected in a map, keyed by "<user>" and "Computer".
-   After the 5th run, the scores of each are summed up and marked as either "even or "odd"
+   Example of how a StateT Monad transformer could be used.
+
+   A Tally of numbers, entered by user input and by the computer, via random generation
+   is stored in a map, keyed by "<user>" and "Computer".
+   After the user enters his 5th and final number, the numbers stored in the "GuessingGameMonad"
+   are summed up and the result, evaluated as being either even or odd, is then printed to the screen.
    
    Example Result:
   [("Computer",16,"The sum of guesses is an even number"),("Tom",9,"The sum of guesses is an odd number")]
@@ -24,7 +27,7 @@ data Tally = Tally {
     roundsSoFar :: Int
 } deriving (Show)
 
-type MorraGameMonad a = StateT Tally IO a
+type GuessingGameMonad a = StateT Tally IO a
 type Results = [(String, String)]
 
 main :: IO ()
@@ -37,7 +40,7 @@ main = do
     _ <- runStateT (playGame whoami) initialState 
     pure ()
 
-playGame :: String -> MorraGameMonad ()
+playGame :: String ->GuessingGameMonad ()
 playGame playerName = 
  forever $ do
     sb <- get
@@ -47,7 +50,7 @@ playGame playerName =
     else
        exitGame
 
-continueGame :: String -> MorraGameMonad ()
+continueGame :: String ->GuessingGameMonad ()
 continueGame playerName = do    
     value      <- lift $ read <$> getLine
     scoreBoard <- get
