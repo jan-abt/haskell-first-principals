@@ -6,11 +6,10 @@ import System.Environment (getArgs)
 import Debug.Trace (traceIO)
 import Control.Monad.Reader
 import Data.IORef
-import qualified Data.Map.Internal as M
+import qualified Data.Map as M
 import Data.Text.Lazy (Text)
 import qualified Data.Text.Lazy as TL
 import Web.Scotty.Trans
-
 
 data Config = Config {
     counter :: IORef (M.Map Text Integer),
