@@ -1,4 +1,4 @@
-module GuessingGame where
+module SumOfGuesses where
 
 import System.Random ( randomRIO )
 import Data.Bool ( bool )
@@ -6,7 +6,6 @@ import qualified Data.Map as M
 import Control.Monad.State
 import Debug.Trace (traceIO)
 import System.Exit ( exitSuccess )  
-
 import Control.Monad (forever)
 import System.IO 
 
@@ -40,7 +39,7 @@ main = do
     _ <- runStateT (playGame whoami) initialState 
     pure ()
 
-playGame :: String ->GuessingGameMonad ()
+playGame :: String -> GuessingGameMonad ()
 playGame playerName = 
  forever $ do
     sb <- get
@@ -50,7 +49,7 @@ playGame playerName =
     else
        exitGame
 
-continueGame :: String ->GuessingGameMonad ()
+continueGame :: String -> GuessingGameMonad ()
 continueGame playerName = do    
     value      <- lift $ read <$> getLine
     scoreBoard <- get

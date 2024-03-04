@@ -26,7 +26,7 @@ library
     exposed-modules:  MaybeTransformer, EitherTransformer, ReaderTransformer, StateTransformer, 
                       OuterInner, Scotty, Lib, MonadTrans, MonadIO, MaybeTExample, EitherTExample,
                       ExceptTExample, EquivalenceTest, MonadTransformerStackExample, ChapterExercises,
-                      HitCounter, GuessingGame
+                      HitCounter, SumOfGuesses, MoraGame
     hs-source-dirs:   src
     build-depends:    hspec ^>= 2.11.7,
                       QuickCheck ^>= 2.14.3,
