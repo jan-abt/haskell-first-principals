@@ -15,7 +15,7 @@ data Winner = Player | Computer | Tie  deriving (Show, Eq, Read)
 -- a type alias defining the StateT transformer monad for our purposes
 --  e.g., a specialization of StateT
 --  MoraGameMonad a = StateT GameState IO a
---  MoraGameMonad () = StateT GameState IO a 
+--  MoraGameMonad () = StateT GameState IO () 
 -- () because we don't return a result. We're going to interact with the state 
 type MoraGameMonad a = StateT GameState IO a 
 
