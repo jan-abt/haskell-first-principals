@@ -43,12 +43,6 @@ playGame =
     else
        exitGame
 
-exitGame::  MoraGameMonad ()
-exitGame = do
-    gs <- get    
-    lift $ traceIO $ show $ scores gs
-    liftIO exitSuccess
-
 -- Play one round of Mora in MoraGameMonad
 playMoraRound :: MoraGameMonad () 
 playMoraRound = do
@@ -70,47 +64,53 @@ playMoraRound = do
 
   determineRoundWinner
 
--- Generate a random int between 0 and 2, convert that to "Guess"
-generateGuess :: IO Guess
-generateGuess = do
-  randomIndex <- randomRIO (0, 2) :: IO Int
-  return $ case randomIndex of
-    0 -> Rock
-    1 -> Paper
-    _ -> Scissors
+  where 
+    -- Generate a random int between 0 and 2, convert that to "Guess"
+    generateGuess :: IO Guess
+    generateGuess = do
+      randomIndex <- randomRIO (0, 2) :: IO Int
+      return $ case randomIndex of
+        0 -> Rock
+        1 -> Paper
+        _ -> Scissors
 
+    determineRoundWinner :: MoraGameMonad () -- 
+    determineRoundWinner = do
 
+      -- Extract guesses from the game's state
+      gameState <- get
+      let (pGuesses, cGuesses, rp) = 
+            (playerGuesses gameState, computerGuesses gameState, roundsPlayed gameState)
 
-determineRoundWinner :: MoraGameMonad () -- 
-determineRoundWinner = do
+      -- Lift IO actions into MoraGameMonad context and print the current state to the terminal
+      liftIO $ traceIO $ "("++show rp++") you chose: " ++ show (head pGuesses) ++ ", computer chose: " ++ show (head cGuesses) ++ "!"
 
-  -- Extract guesses from the game's state
-  gameState <- get
-  let (pGuesses, cGuesses, rp) = 
-        (playerGuesses gameState, computerGuesses gameState, roundsPlayed gameState)
+      -- determine Winner
+      let winner = case (head pGuesses,  head cGuesses) of
+                (a, b) | a == b -> Tie
+                (Rock, Scissors) -> Player
+                (Scissors, Paper) -> Player
+                (Paper, Rock) -> Player
+                _ -> Computer
 
-  -- Lift IO actions into MoraGameMonad context and print the current state to the terminal
-  liftIO $ traceIO $ "("++show rp++") you chose: " ++ show (head pGuesses) ++ ", computer chose: " ++ show (head cGuesses) ++ "!"
+      -- update state of Scores
+      modify (\gs -> 
+          let (Scores player computer tie) = scores gs      
+          in gs {
+              scores = case winner of
+                Player ->  Scores (player+1) computer tie
+                Computer ->  Scores player (computer+1) tie
+                _ -> Scores player computer (tie+1)
+          }
+       ) 
 
-  -- determine Winner
-  let winner = case (head pGuesses,  head cGuesses) of
-            (a, b) | a == b -> Tie
-            (Rock, Scissors) -> Player
-            (Scissors, Paper) -> Player
-            (Paper, Rock) -> Player
-            _ -> Computer
-
-  -- update state of Scores
-  modify (\gs -> 
-      let (Scores player computer tie) = scores gs      
-      in gs {
-          scores = case winner of
-            Player ->  Scores (player+1) computer tie
-            Computer ->  Scores player (computer+1) tie
-            _ -> Scores player computer (tie+1)
-      }
-   ) 
-
+--  exit the game and display the current state (Scores)   
+exitGame::  MoraGameMonad ()
+exitGame = do
+    gs <- get    
+    lift $ traceIO $ show $ scores gs
+    liftIO exitSuccess
+ 
 main :: IO ()
 main = do
   putStrLn "Welcome to Mora!"
