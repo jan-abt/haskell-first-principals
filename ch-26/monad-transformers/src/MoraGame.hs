@@ -39,13 +39,13 @@ playGame =
     gs <- get
     if roundsPlayed gs < 5
     then
-       playMoraRound
+       playRound
     else
        exitGame
 
 -- Play one round of Mora in MoraGameMonad
-playMoraRound :: MoraGameMonad () 
-playMoraRound = do
+playRound :: MoraGameMonad () 
+playRound = do
   -- Lift the result of the players's input action into MoraGameMonad context
   pGuess <- lift $ read <$> getLine
   cGuess <- lift generateGuess
