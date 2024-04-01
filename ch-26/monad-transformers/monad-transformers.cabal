@@ -20,13 +20,28 @@ common common-all
                       containers ^>=0.6.7,
                       unliftio-core ^>=0.2.1.0,
                       mtl ^>=2.3.1,
-                      text ^>=2.0.2                
+                      text ^>=2.0.2,
+                      bytestring ^>=0.12.1.0,                      
+                      servant, 
+                      directory ^>=1.3.8.1,
+                      unix ^>=2.8.5.0,
+                      http-client ^>=0.7.16,
+                      network ^>=3.1.4.0,
+                      filepath,
+                      servant-server,
+                      servant-multipart ^>=0.12.1,
+                      servant-multipart-api ^>=0.12.1,
+                      warp ,
+                      wai-extra ^>=3.1.6,      
+                      aeson ^>=2.2.1.0,    
+                      unliftio ^>=0.2.25.0,            
+                      yaml ^>=0.11.11.2               
 library
     import:           common-all
     exposed-modules:  MaybeTransformer, EitherTransformer, ReaderTransformer, StateTransformer, 
                       OuterInner, Scotty, Lib, MonadTrans, MonadIO, MaybeTExample, EitherTExample,
                       ExceptTExample, EquivalenceTest, MonadTransformerStackExample, ChapterExercises,
-                      HitCounter, SumOfGuesses, MoraGame
+                      HitCounter, SumOfGuesses, MoraGame, StackemHigh
     hs-source-dirs:   src
     build-depends:    hspec ^>= 2.11.7,
                       QuickCheck ^>= 2.14.3,
@@ -37,7 +52,7 @@ library
 executable monad-transformers
     import:           common-all
     main-is:          Main.hs
-    other-modules:    Lib, Doodles
+    other-modules:    Lib
     hs-source-dirs:   app, src
     build-depends:    hspec ^>= 2.11.7,
                       QuickCheck ^>= 2.14.3

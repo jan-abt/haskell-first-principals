@@ -19,7 +19,7 @@ routes :: DB.Connection -> ScottyM ()
 routes conn = do 
     -- generate a short uri for the full-length uri that was provided as a query parameter and store the key value pair in redis 
     get "/" $ do 
-        uri <- param "uri" -- "uri" query parameter (name1=value1&name2= ...)
+        uri <- queryParam "uri" -- "uri" query parameter (name1=value1&name2= ...)
         case parseURI (TL.unpack uri) of
             Just _ -> do
                 newShortURI <- liftIO mkShortURI
@@ -30,7 +30,7 @@ routes conn = do
             Nothing -> text (uriInvalidMessage uri) 
     -- retrieve from redis the full-length uri for the short uri that was provided in the sub-path
     get "/:short" $ do
-        short <- param "short"  -- URI path capture (/users/:name/)
+        short <- queryParam "short"  -- URI path capture (/users/:name/)
         uri <- liftIO (retrieveURI conn short) 
         case uri of
             Left reply -> text (TL.pack (show reply))

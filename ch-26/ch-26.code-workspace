@@ -4,5 +4,7 @@
 			"path": "monad-transformers"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"haskell.ghcupExecutablePath": "~/.ghcup"
+	}
 }

@@ -6,7 +6,7 @@ import Prelude hiding (abs)
 import Data.Bifunctor
 
 class (Monad m) => MonadIO m where
-  -- | "lifts" a computation from the 'IO' monad.
+  -- | "lifts" a computation from the 'IO' monad into the 'm' Monad context.
   liftIO :: IO a -> m a
 
 instance MonadIO IO where
