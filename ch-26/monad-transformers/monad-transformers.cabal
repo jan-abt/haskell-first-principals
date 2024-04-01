@@ -40,7 +40,7 @@ library
     import:           common-all
     exposed-modules:  MaybeTransformer, EitherTransformer, ReaderTransformer, StateTransformer, 
                       OuterInner, Scotty, Lib, MonadTrans, MonadIO, MaybeTExample, EitherTExample,
-                      ExceptTExample, EquivalenceTest, MonadTransformerStackExample, ChapterExercises,
+                      ExceptTExample, EquivalenceTest, MonadTransStack, ChapterExercises,
                       HitCounter, SumOfGuesses, MoraGame, StackemHigh
     hs-source-dirs:   src
     build-depends:    hspec ^>= 2.11.7,

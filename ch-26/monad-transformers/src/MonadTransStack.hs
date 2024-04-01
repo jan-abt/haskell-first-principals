@@ -1,6 +1,6 @@
 {-# LANGUAGE FlexibleContexts #-}
 
-module MonadTransformerStackExample where
+module MonadTransStack where
 
 import Control.Monad.Reader
 import Control.Monad.State (MonadState(put, get))
