@@ -17,11 +17,13 @@ common common-all
     
 library
     import:           common-all
-    exposed-modules:  Lib, Doodles, MVar
+    exposed-modules:  Lib, Doodles, MVar, Share, Join, NestedIO
     hs-source-dirs:   src
     build-depends:    hspec ^>= 2.11.7,
                       QuickCheck ^>= 2.14.3,
-                      checkers ^>=0.6.0 
+                      checkers ^>=0.6.0,
+                      time ^>=1.12.2,
+                      random ^>=1.2.1.2
                 
 executable monad-transformers
     import:           common-all

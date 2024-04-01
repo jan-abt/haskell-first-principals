@@ -4,6 +4,7 @@
 
 #### Useful Cabal commands
 * `cabal clean`
+* `cabal repl io`
 * `cabal build`
 * `cabal test`
 * `cabal run`
