@@ -5,6 +5,6 @@
 		}
 	],
 	"settings": {
-		"haskell.ghcupExecutablePath": "~/.ghcup"
+		"haskell.ghcupExecutablePath": "~/.ghcup/9.6.3"
 	}
 }

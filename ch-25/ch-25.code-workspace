@@ -4,5 +4,7 @@
 			"path": "composing-types"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"haskell.ghcupExecutablePath": "~/.ghcup/9.6.3"
+	}
 }

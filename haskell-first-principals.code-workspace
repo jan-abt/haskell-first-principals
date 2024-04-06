@@ -1,0 +1,113 @@
+{
+	"folders": [
+     	{
+			"path": "ch-03/hello-haskell"
+		},				
+     	{
+			"path": "ch-04/strings"
+		},				
+     	{
+			"path": "ch-05/basic-data-types"
+		},				
+     	{
+			"path": "ch-06/types"
+		},				
+     	{
+			"path": "ch-07/type-classes"
+		},				
+     	{
+			"path": "ch-08/functions"
+		},				
+     	{
+			"path": "ch-09/recursion"
+		},				
+     	{
+			"path": "ch-10/cipher-app"
+		},
+		{
+			"path": "ch-10/lists"
+		},				
+     	{
+			"path": "ch-11/folds"
+		},				
+     	{
+			"path": "ch-12/algebraic-data-types"
+		},				
+     	{
+			"path": "ch-13/root-project"
+		},
+		{
+			"path": "ch-13/dependent-project"
+		},
+		{
+			"path": "ch-13/hangman-app"
+		},
+		{
+			"path": "ch-13/palindrome-app"
+		},
+		{
+			"path": "ch-13/person-app"
+		},	
+		{
+			"path": "ch-14/arithmetic-app"
+		},				
+     	{
+			"path": "ch-14/morse-code-app"
+		},	
+		{
+			"path": "ch-14/testing"
+		},				
+     	{
+			"path": "ch-15/chapter-app"
+		},				
+     	{
+			"path": "ch-15/monoid"
+		},			
+		 {
+			"path": "ch-15/semigroup"
+		},					
+     	{
+			"path": "ch-16/functors"
+		},				
+     	{
+			"path": "ch-17/applicative"
+		},				
+     	{
+			"path": "ch-18/monad-spooky-no"
+		},				
+     	{
+			"path": "ch-19/abstract-structure-applied"
+		},				
+		{
+			"path": "ch-19/url-shortener"
+		},				
+     	{
+			"path": "ch-20/foldable"
+		},				
+     	{
+			"path": "ch-21/traversable"
+		},				
+     	{
+			"path": "ch-22/reader"
+		},	
+		{
+			"path": "ch-22/url-shortener"
+		},				
+     	{
+			"path": "ch-23/state"
+		},				
+     	{
+			"path": "ch-24/parser-combinators"
+		},				
+     	{
+			"path": "ch-25/composing-types"
+		},				
+     	{
+			"path": "ch-26/monad-transformers"
+		},				
+     	{
+			"path": "ch-29/io"
+		},				
+	],
+	"settings": {}
+}
