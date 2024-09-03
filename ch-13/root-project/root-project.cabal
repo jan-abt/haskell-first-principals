@@ -14,7 +14,7 @@ common common-all
     default-language: GHC2021
     ghc-options:      -Wall
     build-depends:    base ^>=4.18.1.0 && < 5,
-                      Cabal ^>=3.10.2.1
+                      Cabal ^>=3.10.3.0
 
 executable other-project
     import:           common-all

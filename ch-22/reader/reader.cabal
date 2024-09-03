@@ -18,7 +18,7 @@ library
     exposed-modules:  Lib, Doodles, Exercises, Reader', DogAndPerson, DPIExample, FunctionReader, ReaderPractice
     hs-source-dirs:   src
     build-depends:    base ^>=4.18.1.0 && < 5,
-                      Cabal ^>=3.10.2.1,
+                      Cabal ^>=3.10.3.0,
                       mtl ^>=2.3.1,
                       transformers ^>=0.6.1.1,
                       containers ^>=0.6.7,
@@ -32,7 +32,7 @@ executable reader-exercises
     other-modules:    Lib
     hs-source-dirs:   src, app
     build-depends:    base ^>=4.18.1.0 && < 5,
-                      Cabal ^>=3.10.2.1,
+                      Cabal ^>=3.10.3.0,
                       hspec,
                       QuickCheck
 
@@ -43,6 +43,6 @@ test-suite test-app
     main-is:          TestSuite.hs
     hs-source-dirs:   src, test
     build-depends:    base ^>=4.18.1.0 && < 5,
-                      Cabal ^>=3.10.2.1,
+                      Cabal ^>=3.10.3.0,
                       hspec,
                       QuickCheck

@@ -2,6 +2,9 @@
 
 ## V. 0.1.0.0 -- 2024-02-16
 
+#### terminal-based user interface (TUI) for managing GHC (Glasgow Haskell Compiler) installations and Haskell tooling
+* `ghcup tui`
+
 #### Useful Cabal commands
 * `cabal clean`
 * `cabal build`

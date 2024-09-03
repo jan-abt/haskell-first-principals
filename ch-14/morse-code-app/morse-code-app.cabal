@@ -19,7 +19,7 @@ library
     import:           common-all
     exposed-modules:  Morse
     build-depends:    base ^>=4.18.1.0 && < 5, 
-                      Cabal ^>=3.10.2.1,
+                      Cabal ^>=3.10.3.0,
                       containers,
                       QuickCheck
     
@@ -28,7 +28,7 @@ executable morse-code-app
     main-is:          Main.hs
     other-modules:    Morse
     build-depends:    base ^>=4.18.1.0 && < 5, 
-                      Cabal ^>=3.10.2.1,
+                      Cabal ^>=3.10.3.0,
                       containers,
                       QuickCheck,
                       morse-code-app
@@ -42,6 +42,6 @@ test-suite test-test
     hs-source-dirs:   tests
     main-is:          Tests.hs
     build-depends:    base ^>=4.18.1.0 && < 5, 
-                      Cabal ^>=3.10.2.1,
+                      Cabal ^>=3.10.3.0,
                       containers,
                       QuickCheck  

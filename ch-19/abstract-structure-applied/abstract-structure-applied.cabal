@@ -18,7 +18,7 @@ library
     exposed-modules:  Lib, Doodles
     hs-source-dirs:   src
     build-depends:    base ^>=4.18.1.0 && < 5,
-                      Cabal ^>=3.10.2.1,
+                      Cabal ^>=3.10.3.0,
                       hspec,
                       QuickCheck,
                       checkers ^>=0.6.0 ,
@@ -35,7 +35,7 @@ executable applying-structure
     other-modules:    Lib
     hs-source-dirs:   src, app
     build-depends:    base ^>=4.18.1.0 && < 5,
-                      Cabal ^>=3.10.2.1,
+                      Cabal ^>=3.10.3.0,
                       hspec,
                       QuickCheck
 
@@ -46,6 +46,6 @@ test-suite test-app
     main-is:          TestSuite.hs
     hs-source-dirs:   src, test
     build-depends:    base ^>=4.18.1.0 && < 5,
-                      Cabal ^>=3.10.2.1,
+                      Cabal ^>=3.10.3.0,
                       hspec,
                       QuickCheck
