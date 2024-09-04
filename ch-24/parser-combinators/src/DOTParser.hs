@@ -17,9 +17,12 @@ import Control.Monad
 -- DOT Language 
 -- website: https://graphviz.org/doc/info/lang.html 
 
--- ================================================================================================== --
--- ======================================  DATA TYPES   ============================================= --
--- ================================================================================================== --
+-- Graph Visualizer
+-- https://dreampuf.github.io/GraphvizOnline  
+
+-- --------------------------------------------------------------------------------------- --
+-- ---------------------------------- DATA TYPES ----------------------------------------- --
+-- --------------------------------------------------------------------------------------- --
 
 type Id = String
 
@@ -112,9 +115,9 @@ data Operand =
   Unidirectional | Bidirectional
   deriving (Show)
 
--- ================================================================================================== --
--- ========================================== UTILITIES ============================================= --
--- ================================================================================================== --
+-- --------------------------------------------------------------------------------------- --
+-- ----------------------------------- UTILITIES ----------------------------------------- --
+-- --------------------------------------------------------------------------------------- --
 
 -- Collect each item of type "[a]" in the manner specified in the "item" parser, until the "lastItem" parser succeeds.  
 -- Includes the parse result of the first parsed element and drops the parse result of the "lastItem" parsed.
@@ -194,9 +197,9 @@ matchString str =
       Just x  -> Just (concat x)
 
 
--- ================================================================================================== --
--- ========================================= PARSER LOGIC =========================================== --
--- ================================================================================================== --
+-- ----------------------------------------------------------------------------------------- --
+-- ---------------------------------- PARSER LOGIC ----------------------------------------- --
+-- ----------------------------------------------------------------------------------------- --
 
 -- a=b | c=\"d e f\"
 parseKeyValueStatement :: Parser String -> Parser KeyValueStatement
@@ -382,96 +385,154 @@ parseGraph = do
     bracketOpen     = spaces >>  string "{"
     bracketClose    = spaces >>  string "}" <* spaces
   
--- ================================================================================================== --
--- =========================================== PLAYGROUND =========================================== --
--- ================================================================================================== --
 
-sampleStatements :: IO ()
-sampleStatements = do
+-- ----------------------------------------------------------------------------------------- --
+-- -------------------------------------- EXAMPLES ----------------------------------------- --
+-- ----------------------------------------------------------------------------------------- --
+
+parseStatements :: IO ()
+parseStatements = do
 
     let _eof = "" <$ notFollowedBy anyChar
     let _anyStr = (:[]) <$> anyChar
     let _ans = (:[]) <$> (alphaNum <|> space)
 
-    print $ parseString (parseStatementList _eof) mempty "graph [e=f,a=a],a=b"
-    print $ parseString parseGraph  mempty "strict graph ja4{ node [c=s,a=l],graph [e=f]}"
-    -- =============== TEST ERRORS ================== --
-    putStrLn $ concat (replicate 38 "--")
-    putStrLn $ " --" ++ concat (replicate 8 " Error --")
-    putStrLn $ concat (replicate 38 "--")
-
-    print $ parseString ( collectInner _anyStr  alphaNum  _eof True)  mempty "123$ tom"
+    -- =============== TEST ERRORS (EXPECTED FAILS)================== --
+    putStrLn $ concat (replicate 46 "--")
+    putStrLn $ "Expected --" ++ concat (replicate 8 " Error --") ++ " Expected"
+    putStrLn $ concat (replicate 46 "--") 
+    putStrLn "\n" 
+    print $ parseString ( collectInner _anyStr  alphaNum  _eof True)  mempty "123$ Tom"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseKeyValueStatement _eof) mempty "0 tom=Jones1934"
+    putStrLn "\n---------------------------------\n\n" 
+
 
     -- =============== TEST SUCCESSES ================== --
-    putStrLn $ concat (replicate 46 "--")
-    putStrLn $ " --" ++ concat (replicate 8 " Success --")
-    putStrLn $ concat (replicate 46 "--")
-
+    putStrLn $ concat (replicate 43 "--")
+    putStrLn $ "Expected --" ++ concat (replicate 6 " Success --") ++ " Expected"
+    putStrLn $ concat (replicate 43 "--")
+    putStrLn "\n" 
+    print $ parseString (parseStatementList _eof) mempty "graph [e=f,a=a],a=b"
+    putStrLn "\n---------------------------------\n" 
+    print $ parseString parseGraph  mempty "strict graph ja4{ node [c=s,a=l],graph [e=f]}"
+    putStrLn "\n---------------------------------\n" 
+    print $ parseString parseGraph  mempty "digraph G {subgraph cluster_0 {style=filled;color=lightgrey;node [style=filled,color=white];a0 -> a1 -> a2 -> a3;label = \"process #1\"};subgraph cluster_1 {node [style=dotted, color=blue];b0 -> b1 -> b2 -> b3;label = \"process #2\";color=blue};start -> a0;start -> b0;a1 -> b3;b2 -> a3;a3 -> a0;a3 -> end;b3 -> end;start [shape=Mdiamond];end [shape=Msquare]}"
+    putStrLn "\n---------------------------------\n" 
+    print $ parseString parseGraph mempty "graph{ subgraph cluster_0 { nodeIdent3:portIdent3:ne [a=b] ; style=filled;color=lightgrey;node [style=\"a.filled\", color=white]; a0 -> a1 -> a2 -> a3;label = \"process #1\"} ->  b0 -> b1 -> b2 -> b3  [label=\"edge bla\" ; color=\"blue\"]}}"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString ( collectInner (string "|") anyChar (string "|") True) mempty "| tom|"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString ( collectInner _anyStr  anyChar _eof True) mempty "\n\t12 3  J   a    n\nJones "
+    putStrLn "\n---------------------------------\n" 
     print $ parseString ( collectInner (  string "\"") anyChar (string "\"") False) mempty "\"\n\t12 3J a n\nJones\""
+    putStrLn "\n---------------------------------\n" 
     print $ parseString ( collectInner _anyStr  (try alphaNum <|> space)  (string "=") False)  mempty "J an 1 971   ="
+    putStrLn "\n---------------------------------\n" 
     print $ parseString ( collectInner _anyStr  (try alphaNum <|> space)  (string "=") True)  mempty "J an 1 971   ="
-
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (collectThrough ( alphaNum <|> space) ( char '=' ) False)  mempty "J an 1 971   ="
-
+    putStrLn "\n---------------------------------\n" 
     print $ parseString ( concat <$>collectUntil _ans (string "=") False)  mempty "J an 1 971   ="
-
-
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseKeyValueStatement _eof ) mempty " tom1971=_Jones1934"
-
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseStatementList _eof) mempty "a=b"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseStatementList _eof) mempty "a=b;c=d"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseStatementList _eof) mempty "graph [a=b]"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseStatementList _eof) mempty "node [a=b]; graph [comment = \" james was born in 1934\" ;more=afterwards\n]"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseStatementList _eof) mempty "more=afterwards;node [a=b]; graph [comment = \" james was born in 1934\"\n]"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseStatementList _eof) mempty "a=b;node [c=d];graph [e=f]; g=h "
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseStatementList _eof) mempty "a=b;node [c=d];e=f;graph [g=h]; i=j ;k=l "
-
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseStatementList _eof) mempty "\nstyle =\"border:blue;45px\";\n  node [ label=\"My uncle !!!\",\n\t\t\trank=\"A15\", \n\t\t\tcolor = green,\n\t\t\tstyle =\"border:blie;12px\"\n\t ];\n\t  tom=hi;\n\t  graph [ label=\"Sample Graph\",\n\t\t\trankdir=TB, \n\t\t\tfontcolor = blue,\n\t\t\tfontsize =\"7500pt\"]"
-
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseGraph mempty "graph {graph [ label=\"My Graph\", fontcolor = blue,fontsize = \"25pt\", color=red]}"
-
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseGraph mempty "strict graph j12 {\n node \n[\nmany=\"tab and next line symbols\"\n]\n }\n"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseGraph mempty "strict graph  {\n node [a=b] }\n"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseGraph  mempty "strict graph ja4{ a=b;node [d=r];b=d;graph [qqqqq=\"fdfsdfdsf  sdfdf\"]}"
-
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseGraph mempty "strict graph  tom12 {  tom=\"ww\"; node [ label=\"My uncle !!!\",rank= tom15, color = green,style =\"border:black;solid;12px\"];  tom=hi;graph [ label=\"Sample Graph\",rankdir=TB, fontcolor = blue,fontsize =\"25pt\"\n]\n}\n"
-
-    print $ parseString parseGraph mempty
-     "strict graph  tom12 {\n   tom=\"ww\";\n  node [ label=\"My uncle !!!\",\n\t\t\trank=A15, \n\t\t\tcolor = green,\n\t\t\tstyle =\"border:orange;dotted;12px\"\n\t ];\n\t  tom=hi;\n\t  graph [ label=\"Sample Graph\",\n\t\t\trankdir=TB, \n\t\t\tfontcolor = blue,\n\t\t\tfontsize =\"75pt\"]\n}\n\n"
-
+    putStrLn "\n---------------------------------\n" 
+    print $ parseString parseGraph mempty "strict graph  tom12 {\n   tom=\"ww\";\n  node [ label=\"My uncle !!!\",\n\t\t\trank=A15, \n\t\t\tcolor = green,\n\t\t\tstyle =\"border:orange;dotted;12px\"\n\t ];\n\t  tom=hi;\n\t  graph [ label=\"Sample Graph\",\n\t\t\trankdir=TB, \n\t\t\tfontcolor = blue,\n\t\t\tfontsize =\"75pt\"]\n}\n\n"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseGraph mempty "strict graph G1{ nodeIdent1:portIdent1:ne [label=\"Node Identifier 1\" ; color=\"green\"] }"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseGraph mempty "strict graph G2{ nodeIdent2:portIdent2:ne }"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseGraph mempty "strict graph G3{ nodeIdent3:portIdent3 [label=\"nodeIdent3\" ; color=\"green\"] }"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseGraph mempty "strict graph G4{ nodeIdent4:portIdent4 }"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseGraph mempty "strict graph G5{ nodeIdent5:ne [label=\"nodeIdent5\" ; color=\"green\"] }"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseGraph mempty "strict graph G6{ nodeIdent6:ne }"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseGraph mempty "strict graph G7{ nodeIdent7 [label=\"nodeIdent7\" ; color=\"green\"] }"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseGraph mempty "strict graph G8{ nodeIdent8; a=b }"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseGraph mempty "strict graph G9 {abs:mid:ne [why=not];lot:of:nw [say=yes]}"
-    
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseEdgeRHS mempty "-> nodeId1:portId1:sw"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseEdgeRHS mempty "-> nodeId1:portId1:sw -> nodeIdent2:portIdent2:ne"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseEdgeRHS mempty "-> subgraph SBT1 { kT1=vT1;node [nkT1=nvT1];asT1=asT1} -> subgraph SBT2 { kT2=vT2;node [nkT2=nvT2];askT2=asvT2}"
-
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseEdgeRHS mempty "-> nodeIdent1:portIdent1 -> subgraph S1 {attribute1=value1}"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseEdgeRHS mempty "-> subgraph S1 {attribute1=value1} "
+    putStrLn "\n---------------------------------\n" 
     print $ parseString parseEdgeRHS mempty "-> subgraph SBT1 {a1=b1} -> n1:p1:se -> subgraph SBT2 {a2=b2} -> n2:p2:se ->  subgraph SBT3 {a3=b3}"
-
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseEdgeStatement (pure "")) mempty " a1:p1:nw -> a2:p2:nw "
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseEdgeStatement (pure "")) mempty " a1:p1:nw -> subgraph SG1 {a=b} "
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseEdgeStatement (pure "")) mempty " subgraph SG1 {a=b} -> a1:p1:nw "
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseEdgeStatement (pure "")) mempty " a1:p1:nw -> subgraph SG1 {a=b} [ tom= jones]"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseEdgeStatement (pure "")) mempty " subgraph SG1 {a=b} -> a1:p1:nw [ tom= jones]"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseEdgeStatement (pure "")) mempty " subgraph cluster_0 { a=b } ->  w:b0  [label=\"always keep the edge !!!\" ; color=blue]  "
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseEdgeStatement (pure "")) mempty " a1:p1:nw -> subgraph SG1 {a=b} -> subgraph SG2 {a2=b2} [jelly=beans]"
+    putStrLn "\n---------------------------------\n" 
     print $ parseString (parseEdgeStatement (pure "")) mempty " a1:p1:nw -> subgraph SG1 {a=b} -> subgraph SG2 {a2=b2} -> a2:p2:se [bird=house]"
-    print $ parseString (parseEdgeStatement (pure "")) mempty " subgraph cluster { a=b } ->  w:b0  [label=\"edge bla\" ; color=\"blue\"] "
+    putStrLn "\n---------------------------------\n" 
+    print $ parseString (parseEdgeStatement (pure "")) mempty " subgraph cluster { a=b } ->  w:b0  [label=\"edge bla\" ; color=\"blue\"] " 
+    putStrLn "\n\n" 
 
-sampleDOTFile1 :: String
-sampleDOTFile1 = [r|
+parseFiles :: IO ()
+parseFiles = do
+
+  print $ parseString parseGraph mempty parseDOTFile1
+  putStrLn "\n---------------------------------\n" 
+  print $ parseString parseGraph mempty parseDOTFile2
+  putStrLn "\n---------------------------------\n" 
+  print $ parseString parseGraph mempty parseDOTFile3
+  putStrLn "\n---------------------------------\n" 
+  print $ parseString parseGraph mempty parseDOTFile4
+  putStrLn "\n---------------------------------\n" 
+  print $ parseString parseGraph mempty parseDOTFile5
+  putStrLn "\n---------------------------------\n" 
+  print $ parseString parseGraph mempty parseDOTFile6
+  putStrLn "\n\n" 
+
+
+parseDOTFile1 :: String
+parseDOTFile1 = [r|
   strict digraph G  {
    node[cccccc=dddddd];
      nodeIdent0[label="node identifier #0" ; color="blue"];
@@ -506,14 +567,12 @@ sampleDOTFile1 = [r|
     b3 -> end;
 
     start [shape=Mdiamond];
-    end [shape=Msquare]
-   
+    end [shape=Msquare]   
   }
- 
 |]
 
-sampleDOTFile2 :: String
-sampleDOTFile2 = [r|
+parseDOTFile2 :: String
+parseDOTFile2 = [r|
   digraph {
     a -> b[label="0.2",weight="0.2"];
     a -> c[label="0.4",weight="0.4"];
@@ -521,11 +580,11 @@ sampleDOTFile2 = [r|
     c -> e[label="0.6",weight="0.6"];
     e -> e[label="0.1",weight="0.1"];
     e -> b[label="0.7",weight="0.7"]
-}
+  }
 |]
 
-sampleDOTFile3 :: String
-sampleDOTFile3 = [r|
+parseDOTFile3 :: String
+parseDOTFile3 = [r|
   digraph {
     subgraph cluster_0 {
         label="Subgraph A";
@@ -539,11 +598,11 @@ sampleDOTFile3 = [r|
         a -> f;
         f -> c
     }
-}
+  }
 |]
 
-sampleDOTFile4 :: String
-sampleDOTFile4 = [r|
+parseDOTFile4 :: String
+parseDOTFile4 = [r|
   graph {
     splines=line;
     subgraph cluster_0 {
@@ -564,12 +623,11 @@ sampleDOTFile4 = [r|
     b -- e;
     c -- d;
     c -- e
-}
-      
+  }     
 |]
 
-sampleDOTFile5 :: String
-sampleDOTFile5 = [r|
+parseDOTFile5 :: String
+parseDOTFile5 = [r|
  graph {
     rankdir=LR; 
     a -- { b; c; d };
@@ -592,20 +650,52 @@ sampleDOTFile5 = [r|
     r -- t;
     s -- z;
     t -- z
-}
-    
- 
-
+ }
 |]
+
+parseDOTFile6 :: String
+parseDOTFile6 = [r|
+ digraph G {
+
+  subgraph cluster_0 {
+    style=filled;
+    color=lightgrey;
+    node [style=filled,color=white];
+    a0 -> a1 -> a2 -> a3;
+    label = "process #1"
+  };
+
+  subgraph cluster_1 {
+    node [style=filled];
+    b0 -> b1 -> b2 -> b3;
+    label = "process #2";
+    color=blue
+  };
+
+  start -> a0;
+  start -> b0;
+  a1 -> b3;
+  b2 -> a3;
+  a3 -> a0;
+  a3 -> end;
+  b3 -> end;
+
+  start [shape=Mdiamond];
+  end [shape=Msquare]
+ }
+|]
+
+title :: String -> IO ()
+title t = do
+    putStrLn "--------------------------------------------------------------------------------------------"
+    putStrLn $ "                            -----  " ++ t ++ " ------                                  "
+    putStrLn "--------------------------------------------------------------------------------------------\n\n"
 
 main:: IO ()
 main = do
 
-      
-      print $ parseString parseGraph mempty "graph{ subgraph cluster_0 { nodeIdent3:portIdent3:ne [a=b] ; style=filled;color=lightgrey;node [style=\"a.filled\", color=white]; a0 -> a1 -> a2 -> a3;label = \"process #1\"} ->  b0 -> b1 -> b2 -> b3  [label=\"edge bla\" ; color=\"blue\"]}}"
-      print $ parseString parseGraph mempty sampleDOTFile1
-      print $ parseString parseGraph mempty sampleDOTFile2
-      print $ parseString parseGraph mempty sampleDOTFile3
-      print $ parseString parseGraph mempty sampleDOTFile4
-      print $ parseString parseGraph mempty sampleDOTFile5
-      sampleStatements
+      -- Graph Visualizer: https://dreampuf.github.io/GraphvizOnline       
+      title "PARSE STATEMENTS" 
+      parseStatements
+      title "PARSE FILES " 
+      parseFiles
