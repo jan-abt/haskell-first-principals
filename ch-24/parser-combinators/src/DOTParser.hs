@@ -116,6 +116,43 @@ data Operand =
 -- ========================================== UTILITIES ============================================= --
 -- ================================================================================================== --
 
+-- Collect each item of type "[a]" in the manner specified in the "item" parser, until the "lastItem" parser succeeds.  
+-- Includes the parse result of the first parsed element and drops the parse result of the "lastItem" parsed.
+-- "AbcdZ" -> "Abcd"
+collectUntil:: Parser a ->  Parser a -> Bool -> Parser [a]
+collectUntil item lastItem skipSpaces =
+  try
+      -- Whenver the parser succeeds in parsing the stop-signal "lastItem", the end of input reached.
+      -- Complete the list (monad) construction by "consing" an empty [] at its head.
+      -- Effectively, we are swapping the stop-signal monad's contents with an empty list and 
+      -- thus dropping the last parse result.
+     ([] <$ lastItem)
+    <|>
+     if skipSpaces
+     -- cons "(:)" the character parsed in the mannter of the "item" parser to the list monad.      
+     -- "spaces" uses "isSpace", a prelude function, which skips formatting characters such as \n, \t or " ".     
+     then (:) <$> ( spaces >> item <* spaces ) <*> collectUntil item lastItem skipSpaces
+     else (:) <$> item <*>  collectUntil item lastItem skipSpaces
+    <|>
+      unexpected "unexpected character encountered"
+
+-- Collect each item of type "a" in the manner specified in the "item" parser, until the "lastItem" parser succeeds.  
+-- Includes both, the parse result of the first parsed element and the parse result of the "lastItem" parsed.
+-- "AbcdZ" -> "AbcdZ"
+collectThrough :: Parser a -> Parser a -> Bool  -> Parser [a]
+collectThrough item lastItem skipSpaces =
+  try
+      -- Whenver the parser succeeds in parsing the stop-signal "lastItem", the end of input reached.
+      -- Complete the list (monad) construction by "consing" the "lastItem" to an empty [].
+      -- Here we are including "lastItem" in the result list monad.
+     ((:[]) <$> lastItem )
+    <|>
+    if skipSpaces
+     then (:) <$> ( spaces >> item <* spaces ) <*> collectThrough item lastItem skipSpaces
+     else (:) <$> item <*>  collectThrough item lastItem skipSpaces
+    <|>
+      error "unexpected character encountered"
+
 -- Collect each item of type "[a]" in the manner specified in the "item" parser, until the "lastItem" parser succeeds.
 -- Note that we are dropping the parse result of the first parsed element, as well as the parse result of the "lastItem" parsed.
 -- Also indicate whether you want to skip space/format characters for your result.  
@@ -140,42 +177,6 @@ collectInner leftItem it rightItem skipSpaces =
           <|>
             unexpected "unexpected character encountered"
 
--- Collect each item of type "[a]" in the manner specified in the "item" parser, until the "lastItem" parser succeeds.  
--- Includes the parse result of the first parsed element and drops the parse result of the "lastItem" parsed.
--- "AbcdZ" -> "Abcd"
-collectUntil:: Parser a ->  Parser a -> Bool -> Parser [a]
-collectUntil item lastItem skipSpaces =
-  try
-      -- Whenver the parser succeeds in parsing the stop-signal "lastItem", the end of input reached.
-      -- Complete the list (monad) construction by "consing" an empty [] at its head.
-      -- Effectively, we are swapping the stop-signal monad's contents with an empty list and 
-      -- thus dropping the last parse result.
-     ([] <$ lastItem)
-    <|>
-     if skipSpaces
-     -- cons "(:)" the character parsed in the mannter of the "item" parser to the list monad.      
-     -- "spaces" uses "isSpace", a prelude function, which skips formatting characters such as \n, \t or " ".     
-     then (:) <$> ( spaces >> item <* spaces ) <*> collectUntil item lastItem skipSpaces
-     else (:) <$> item <*>  collectUntil item lastItem skipSpaces
-    <|>
-      unexpected "unexpected character encountered"
-
--- Collect each item of type "a" in the manner specified in the "item" parser, until the "lastItem" parser succeeds.  
--- Includes bothe, the parse result of the first parsed element and the parse result of the "lastItem" parsed.
--- "AbcdZ" -> "AbcdZ"
-collectThrough :: Parser a -> Parser a -> Bool  -> Parser [a]
-collectThrough item lastItem skipSpaces =
-  try
-      -- Whenver the parser succeeds in parsing the stop-signal "lastItem", the end of input reached.
-      -- Complete the list (monad) construction by "consing" the "lastItem" to an empty [].
-      -- Here we are including "lastItem" in the result list monad.
-     ((:[]) <$> lastItem )
-    <|>
-    if skipSpaces
-     then (:) <$> ( spaces >> item <* spaces ) <*> collectThrough item lastItem skipSpaces
-     else (:) <$> item <*>  collectThrough item lastItem skipSpaces
-    <|>
-      error "unexpected character encountered"
 
 -- uses an alternative "|" of either one or two capturing groups e.g.,the round-braketed content.
 -- The first alternative has only one group, which is for capturing quoted content and it admits any character.
